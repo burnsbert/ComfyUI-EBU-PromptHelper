@@ -285,32 +285,3 @@ color_families = {
 broad_neutrals = set(color_families['Neutrals'] + color_families['Greys'] + color_families['Browns'] + color_families['Metallics'])
 color_families['Broad Neutrals'] = sorted(list(broad_neutrals))
 
-# Each palette is defined as one list:
-# The first element is the palette name (a descriptive title),
-# and the remaining elements are the color names.
-# All categories are stored as one large list of palettes.
-COLOR_PALETTES = {
-    # each complementary entry should be two complementary colors and a 'broad neutral' color
-    'complementary': [
-    ],
-
-    # 4 similar or adjacent colors
-    'analogous': [
-    ],
-
-    #A Triadic color scheme uses three colors that are evenly spaced 120 degrees apart on the color wheel. This creates a balanced, vibrant, and high-contrast palette while maintaining harmony.
-    'triadic': [
-    ],
-
-    # A Split Complementary color scheme consists of a base color and the two colors adjacent to its direct complement on the color wheel. This provides strong contrast like a complementary scheme but with less tension and more harmony.
-    'split_complementary': [
-    ],
-
-    # A Tetradic color scheme uses two complementary color pairs (four colors total), forming a rectangle on the color wheel. This creates a vibrant, diverse palette but requires balance to avoid clashing
-    'tetradic': [
-    ],
-
-    # A Rectangular Tetradic color scheme is a variation of Tetradic, where the four colors are spaced unevenly around the color wheel, forming a rectangle. It typically includes one dominant color and three supporting colors, offering rich contrast and versatility while requiring careful balance.
-    'rectangular_tetradic': [
-    ]
-}

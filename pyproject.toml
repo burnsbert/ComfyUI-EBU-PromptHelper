@@ -1,0 +1,16 @@
+[project]
+name = "ComfyUI_EBU_PromptHelper"
+description = "This ComfyUI extension provides a suite of custom nodes for enhancing and manipulating prompts. Features include random color palette generation, prompt text replacement, prompt randomization using variable names and lists of options, list sampling, file loading, current datetime formatting, and season/weather/time-of-day generation."
+version = "1.0.0"
+authors = [
+    {name = "burnsbert"}
+]
+keywords = keywords = ["comfyui", "prompt", "random", "color", "weather", "datetime", "utf8", "utility"]
+license = {file = "LICENSE"}
+
+[project.urls]
+Repository = "https://github.com/burnsbert/ComfyUI-EBU-PromptHelper"
+
+[tool.comfy]
+PublisherId = "burnsbert"
+DisplayName = "ComfyUI-EBU-PromptHelper"

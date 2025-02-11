@@ -1,0 +1,2562 @@
+{
+  "last_node_id": 190,
+  "last_link_id": 426,
+  "nodes": [
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        4064,
+        -104
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            37
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        270912215733178,
+        "randomize"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        4456,
+        -64
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        4056,
+        152
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 38,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            20
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        8,
+        1
+      ]
+    },
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        4040,
+        -712
+      ],
+      "size": [
+        241.79998779296875,
+        46
+      ],
+      "flags": {},
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 39,
+          "slot_index": 0
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 61,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            30
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        4064,
+        40
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            19
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpmpp_2m"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        3528,
+        -600
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            38,
+            39
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-schnell-fp8.safetensors",
+        "default"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        3696,
+        -224
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp16.safetensors",
+        "flux",
+        "default"
+      ]
+    },
+    {
+      "id": 113,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1937.2314453125,
+        -506.3834228515625
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 416,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "triadic"
+      ]
+    },
+    {
+      "id": 116,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1591.0291748046875,
+        -203.83721923828125
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 413,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "cinnabar green"
+      ]
+    },
+    {
+      "id": 115,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1591.022216796875,
+        -314.81500244140625
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 412,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "indian red"
+      ]
+    },
+    {
+      "id": 117,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1589.6849365234375,
+        -85.42388153076172
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 414,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 118,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1599.1583251953125,
+        43.82836151123047
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 415,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 119,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2024.5435791015625,
+        -219.0660858154297
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 417,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "#4169E1, #CD5C5C, #61B329"
+      ]
+    },
+    {
+      "id": 114,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1584.0858154296875,
+        -431.30438232421875
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 411,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "royal blue"
+      ]
+    },
+    {
+      "id": 136,
+      "type": "String-🔬",
+      "pos": [
+        2433.74267578125,
+        -1438.6474609375
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "We consume the 3 list elements randomly one at a time to ensure that they are all used and there are no duplicates."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 133,
+      "type": "String-🔬",
+      "pos": [
+        1972.30859375,
+        -1130.05712890625
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "replacing commas with newlines to turn this into a list"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 144,
+      "type": "String-🔬",
+      "pos": [
+        1044.3729248046875,
+        -765.3875732421875
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "Generating our color palette. This custom node is a beast with many options. Experiment and find settings you like."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3920,
+        -536
+      ],
+      "size": [
+        422.84503173828125,
+        164.31304931640625
+      ],
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 10
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 348,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            60
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "an oil painting of a duck"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        4064,
+        -264
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            23
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        640,
+        480,
+        1
+      ]
+    },
+    {
+      "id": 165,
+      "type": "EbuPromptHelperRandomize",
+      "pos": [
+        2439.874267578125,
+        -492.8241271972656
+      ],
+      "size": [
+        400,
+        218
+      ],
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 375,
+          "widget": {
+            "name": "prompt_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            377
+          ]
+        },
+        {
+          "name": "word_selected",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "EbuPromptHelperRandomize",
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperRandomize"
+      },
+      "widgets_values": [
+        "dog; cat; lion; tiger; lizard",
+        "MY_ANIMAL",
+        "dog; cat; lion; tiger; lizard",
+        1039,
+        "randomize",
+        true,
+        "semi-colons"
+      ]
+    },
+    {
+      "id": 162,
+      "type": "EbuPromptHelperConsumeListItem",
+      "pos": [
+        3171.906494140625,
+        -1197.29052734375
+      ],
+      "size": [
+        321.5240173339844,
+        255.1984405517578
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list",
+          "type": "STRING",
+          "link": 403,
+          "widget": {
+            "name": "list"
+          }
+        },
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 402,
+          "widget": {
+            "name": "prompt_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            375
+          ]
+        },
+        {
+          "name": "word_selected",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "revised_list",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperConsumeListItem"
+      },
+      "widgets_values": [
+        "MY_COLOR3",
+        "",
+        23799047713127,
+        "randomize",
+        ""
+      ]
+    },
+    {
+      "id": 143,
+      "type": "String-🔬",
+      "pos": [
+        2434.68359375,
+        -758.7741088867188
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "Here we're replacing variables with random options. Note how you have some flexibiliy with the format of your options using delimit_options_with"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 169,
+      "type": "EbuPromptHelperReplace",
+      "pos": [
+        2615.122314453125,
+        1218.2530517578125
+      ],
+      "size": [
+        286.34625244140625,
+        174.828369140625
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 397,
+          "widget": {
+            "name": "prompt_text"
+          }
+        },
+        {
+          "name": "replace_with",
+          "type": "STRING",
+          "link": 383,
+          "widget": {
+            "name": "replace_with"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            382
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperReplace"
+      },
+      "widgets_values": [
+        "",
+        "MY_NOW",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 148,
+      "type": "EbuPromptHelperReplace",
+      "pos": [
+        2889.15771484375,
+        529.489013671875
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 337,
+          "widget": {
+            "name": "prompt_text"
+          }
+        },
+        {
+          "name": "replace_with",
+          "type": "STRING",
+          "link": 426,
+          "widget": {
+            "name": "replace_with"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            340
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperReplace"
+      },
+      "widgets_values": [
+        "",
+        "MY_WEATHER",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 147,
+      "type": "EbuPromptHelperReplace",
+      "pos": [
+        2882.795654296875,
+        128.46385192871094
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 378,
+          "widget": {
+            "name": "prompt_text"
+          }
+        },
+        {
+          "name": "replace_with",
+          "type": "STRING",
+          "link": 423,
+          "widget": {
+            "name": "replace_with"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            337
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperReplace"
+      },
+      "widgets_values": [
+        "",
+        "MY_WHEN",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 173,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2915.683349609375,
+        388.51513671875
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 425,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "late afternoon during early fall"
+      ]
+    },
+    {
+      "id": 129,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2405.075439453125,
+        924.076904296875
+      ],
+      "size": [
+        506.8660583496094,
+        166.4232940673828
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 340,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            345
+          ],
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "A children's book illustration of dog with a cinnabar green hat and royal blue suit and indian red tie at neighborhood block party. The scene takes place late afternoon during early fall of 1991 and this is the weather: clear with a gentle scattering of clouds modestly sustaining a vivid, dry cool environment."
+      ]
+    },
+    {
+      "id": 179,
+      "type": "EbuPromptHelperReplace",
+      "pos": [
+        2128.163818359375,
+        1203.18310546875
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 396,
+          "widget": {
+            "name": "prompt_text"
+          }
+        },
+        {
+          "name": "replace_with",
+          "type": "STRING",
+          "link": 399,
+          "widget": {
+            "name": "replace_with"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            397
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperReplace"
+      },
+      "widgets_values": [
+        "",
+        "[QUALITIES]",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 151,
+      "type": "String-🔬",
+      "pos": [
+        1543.0611572265625,
+        1203.37451171875
+      ],
+      "size": [
+        502.5408630371094,
+        176.64910888671875
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            396
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "The artstyle is whisical and a mixture of illustration and painting.\n\nThis image should have the following qualities:\n[QUALITIES]\n\nGenerated on MY_NOW"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 180,
+      "type": "String-🔬",
+      "pos": [
+        1495.9063720703125,
+        1530.295654296875
+      ],
+      "size": [
+        246.2478485107422,
+        178.17466735839844
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            398
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "cute\nfunny\nheartfelt\nrural\nexciting\nhappy\nfun"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 181,
+      "type": "EbuPromptHelperListSampler",
+      "pos": [
+        1820.9208984375,
+        1508.5657958984375
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list",
+          "type": "STRING",
+          "link": 398,
+          "widget": {
+            "name": "list"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            399
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperListSampler"
+      },
+      "widgets_values": [
+        "",
+        878297896035717,
+        "randomize",
+        3,
+        true
+      ]
+    },
+    {
+      "id": 170,
+      "type": "EbuPromptHelperCurrentDateTime",
+      "pos": [
+        2544.280517578125,
+        1501.45751953125
+      ],
+      "size": [
+        415.8000183105469,
+        86
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "date",
+          "type": "STRING",
+          "links": null,
+          "slot_index": 0
+        },
+        {
+          "name": "time",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "datetime",
+          "type": "STRING",
+          "links": [
+            383
+          ],
+          "slot_index": 2
+        },
+        {
+          "name": "datetime_for_filename",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperCurrentDateTime"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 166,
+      "type": "EbuPromptHelperRandomize",
+      "pos": [
+        2881.716796875,
+        -510.44976806640625
+      ],
+      "size": [
+        409.6338806152344,
+        286.8024597167969
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 377,
+          "widget": {
+            "name": "prompt_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            378
+          ]
+        },
+        {
+          "name": "word_selected",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "EbuPromptHelperRandomize",
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperRandomize"
+      },
+      "widgets_values": [
+        "",
+        "MY_LOCATION",
+        "on main street in a small town\nin outdoor patio seeting at a fancy restaurant\nat a farmer's market\ncollege campus\nneighborhood block party",
+        17,
+        "randomize",
+        true,
+        "newlines"
+      ]
+    },
+    {
+      "id": 168,
+      "type": "String-🔬",
+      "pos": [
+        2417.8330078125,
+        -29.000301361083984
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "Now we're generating random season, time of day, year, and weather"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 182,
+      "type": "String-🔬",
+      "pos": [
+        1071.500244140625,
+        1515.675537109375
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "Here's the List Samper at work!"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 183,
+      "type": "String-🔬",
+      "pos": [
+        3010.14990234375,
+        846.6455688476562
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "Note how we can merge strings"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 154,
+      "type": "EbuPromptHelperCombineTwoStrings",
+      "pos": [
+        2997.95751953125,
+        1115.8934326171875
+      ],
+      "size": [
+        453.5999755859375,
+        200
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "str1",
+          "type": "STRING",
+          "link": 345,
+          "widget": {
+            "name": "str1"
+          }
+        },
+        {
+          "name": "str2",
+          "type": "STRING",
+          "link": 382,
+          "widget": {
+            "name": "str2"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "combined",
+          "type": "STRING",
+          "links": [
+            394
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperCombineTwoStrings"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "\n\n"
+      ]
+    },
+    {
+      "id": 184,
+      "type": "EbuPromptHelperConsumeListItem",
+      "pos": [
+        2795.91064453125,
+        -1186.3201904296875
+      ],
+      "size": [
+        321.5240173339844,
+        255.1984405517578
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list",
+          "type": "STRING",
+          "link": 407,
+          "widget": {
+            "name": "list"
+          }
+        },
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 406,
+          "widget": {
+            "name": "prompt_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            402
+          ]
+        },
+        {
+          "name": "word_selected",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "revised_list",
+          "type": "STRING",
+          "links": [
+            403
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperConsumeListItem"
+      },
+      "widgets_values": [
+        "MY_COLOR2",
+        "",
+        264975990745409,
+        "randomize",
+        ""
+      ]
+    },
+    {
+      "id": 185,
+      "type": "EbuPromptHelperConsumeListItem",
+      "pos": [
+        2433.427978515625,
+        -1181.4920654296875
+      ],
+      "size": [
+        321.5240173339844,
+        255.1984405517578
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list",
+          "type": "STRING",
+          "link": 409,
+          "widget": {
+            "name": "list"
+          }
+        },
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 405,
+          "widget": {
+            "name": "prompt_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            406
+          ]
+        },
+        {
+          "name": "word_selected",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "revised_list",
+          "type": "STRING",
+          "links": [
+            407
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperConsumeListItem"
+      },
+      "widgets_values": [
+        "MY_COLOR1",
+        "",
+        325300617429020,
+        "randomize",
+        ""
+      ]
+    },
+    {
+      "id": 112,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1579.8402099609375,
+        -551.3126220703125
+      ],
+      "size": [
+        315,
+        76
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 410,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            408
+          ],
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "royal blue, indian red, cinnabar green"
+      ]
+    },
+    {
+      "id": 186,
+      "type": "EbuPromptHelperReplace",
+      "pos": [
+        1969.9266357421875,
+        -869.6386108398438
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt_text",
+          "type": "STRING",
+          "link": 408,
+          "widget": {
+            "name": "prompt_text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "updated_prompt_text",
+          "type": "STRING",
+          "links": [
+            409
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperReplace"
+      },
+      "widgets_values": [
+        "",
+        ",",
+        "\n",
+        true
+      ]
+    },
+    {
+      "id": 187,
+      "type": "EbuPromptHelperRandomColorPalette",
+      "pos": [
+        1055.2052001953125,
+        -474.19586181640625
+      ],
+      "size": [
+        390.5999755859375,
+        486
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "palette_string",
+          "type": "STRING",
+          "links": [
+            410
+          ]
+        },
+        {
+          "name": "color1",
+          "type": "STRING",
+          "links": [
+            411
+          ]
+        },
+        {
+          "name": "color2",
+          "type": "STRING",
+          "links": [
+            412
+          ]
+        },
+        {
+          "name": "color3",
+          "type": "STRING",
+          "links": [
+            413
+          ]
+        },
+        {
+          "name": "color4",
+          "type": "STRING",
+          "links": [
+            414
+          ]
+        },
+        {
+          "name": "color5",
+          "type": "STRING",
+          "links": [
+            415
+          ]
+        },
+        {
+          "name": "palette_type",
+          "type": "STRING",
+          "links": [
+            416
+          ]
+        },
+        {
+          "name": "hex_values",
+          "type": "STRING",
+          "links": [
+            417
+          ]
+        }
+      ],
+      "title": "EBU Prompt Helper Color Palette",
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperRandomColorPalette"
+      },
+      "widgets_values": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        "3 colors",
+        "None",
+        "Greys",
+        943778883629685,
+        "randomize"
+      ]
+    },
+    {
+      "id": 127,
+      "type": "String-🔬",
+      "pos": [
+        1796.367431640625,
+        -1589.380126953125
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            405
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "String-🔬"
+      },
+      "widgets_values": [
+        "A children's book illustration of MY_ANIMAL with a MY_COLOR1 hat and MY_COLOR2 suit and MY_COLOR3 tie at MY_LOCATION. The scene takes place MY_WHEN and this is the weather: MY_WEATHER."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 188,
+      "type": "ShowText|pysssss",
+      "pos": [
+        3265.5693359375,
+        382.085205078125
+      ],
+      "size": [
+        369.8238220214844,
+        76
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 424,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "late afternoon during early fall of 1991"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "PreviewImage",
+      "pos": [
+        4129.19580078125,
+        903.8606567382812
+      ],
+      "size": [
+        528.840576171875,
+        480.5522155761719
+      ],
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 41
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        4441.455078125,
+        662.7484741210938
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 24
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        3976.080322265625,
+        507.62774658203125
+      ],
+      "size": [
+        355.20001220703125,
+        326
+      ],
+      "flags": {},
+      "order": 47,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 37,
+          "slot_index": 0
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 30,
+          "slot_index": 1
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 19,
+          "slot_index": 2
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 20,
+          "slot_index": 3
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 23,
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": [],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 43,
+      "type": "FluxGuidance",
+      "pos": [
+        4008,
+        -880
+      ],
+      "size": [
+        320,
+        58
+      ],
+      "flags": {},
+      "order": 45,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 60
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            61
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        21.1
+      ]
+    },
+    {
+      "id": 190,
+      "type": "EbuPromptHelperSeasonWeatherTimeOfDay",
+      "pos": [
+        2158.384521484375,
+        246.84896850585938
+      ],
+      "size": [
+        648.3599853515625,
+        300.0320739746094
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "when",
+          "type": "STRING",
+          "links": [
+            423,
+            424
+          ]
+        },
+        {
+          "name": "when_no_year",
+          "type": "STRING",
+          "links": [
+            425
+          ]
+        },
+        {
+          "name": "weather",
+          "type": "STRING",
+          "links": [
+            426
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EbuPromptHelperSeasonWeatherTimeOfDay"
+      },
+      "widgets_values": [
+        1980,
+        2000,
+        "6:00am",
+        "7:00pm",
+        24090015489304,
+        "randomize",
+        "no skew",
+        "no skew"
+      ]
+    },
+    {
+      "id": 155,
+      "type": "ShowText|pysssss",
+      "pos": [
+        3531.598876953125,
+        1083.313720703125
+      ],
+      "size": [
+        466.27313232421875,
+        240.74607849121094
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 394,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            348
+          ],
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "title": "Final Prompt",
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "A children's book illustration of dog with a cinnabar green hat and royal blue suit and indian red tie at neighborhood block party. The scene takes place late afternoon during early fall of 1991 and this is the weather: clear with a gentle scattering of clouds modestly sustaining a vivid, dry cool environment.\n\nThe artstyle is whisical and a mixture of illustration and painting.\n\nThis image should have the following qualities:\n1. cute\n2. fun\n3. funny\n\nGenerated on 2025-02-10 9:55:27pm"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      10,
+      11,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      19,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      23,
+      5,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      24,
+      13,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      30,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      37,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      38,
+      12,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      39,
+      12,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      41,
+      8,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      60,
+      6,
+      0,
+      43,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      61,
+      43,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      337,
+      147,
+      0,
+      148,
+      0,
+      "STRING"
+    ],
+    [
+      340,
+      148,
+      0,
+      129,
+      0,
+      "STRING"
+    ],
+    [
+      345,
+      129,
+      0,
+      154,
+      0,
+      "STRING"
+    ],
+    [
+      348,
+      155,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      375,
+      162,
+      0,
+      165,
+      0,
+      "STRING"
+    ],
+    [
+      377,
+      165,
+      0,
+      166,
+      0,
+      "STRING"
+    ],
+    [
+      378,
+      166,
+      0,
+      147,
+      0,
+      "STRING"
+    ],
+    [
+      382,
+      169,
+      0,
+      154,
+      1,
+      "STRING"
+    ],
+    [
+      383,
+      170,
+      2,
+      169,
+      1,
+      "STRING"
+    ],
+    [
+      394,
+      154,
+      0,
+      155,
+      0,
+      "STRING"
+    ],
+    [
+      396,
+      151,
+      0,
+      179,
+      0,
+      "STRING"
+    ],
+    [
+      397,
+      179,
+      0,
+      169,
+      0,
+      "STRING"
+    ],
+    [
+      398,
+      180,
+      0,
+      181,
+      0,
+      "STRING"
+    ],
+    [
+      399,
+      181,
+      0,
+      179,
+      1,
+      "STRING"
+    ],
+    [
+      402,
+      184,
+      0,
+      162,
+      1,
+      "STRING"
+    ],
+    [
+      403,
+      184,
+      2,
+      162,
+      0,
+      "STRING"
+    ],
+    [
+      405,
+      127,
+      0,
+      185,
+      1,
+      "STRING"
+    ],
+    [
+      406,
+      185,
+      0,
+      184,
+      1,
+      "STRING"
+    ],
+    [
+      407,
+      185,
+      2,
+      184,
+      0,
+      "STRING"
+    ],
+    [
+      408,
+      112,
+      0,
+      186,
+      0,
+      "STRING"
+    ],
+    [
+      409,
+      186,
+      0,
+      185,
+      0,
+      "STRING"
+    ],
+    [
+      410,
+      187,
+      0,
+      112,
+      0,
+      "STRING"
+    ],
+    [
+      411,
+      187,
+      1,
+      114,
+      0,
+      "STRING"
+    ],
+    [
+      412,
+      187,
+      2,
+      115,
+      0,
+      "STRING"
+    ],
+    [
+      413,
+      187,
+      3,
+      116,
+      0,
+      "STRING"
+    ],
+    [
+      414,
+      187,
+      4,
+      117,
+      0,
+      "STRING"
+    ],
+    [
+      415,
+      187,
+      5,
+      118,
+      0,
+      "STRING"
+    ],
+    [
+      416,
+      187,
+      6,
+      113,
+      0,
+      "STRING"
+    ],
+    [
+      417,
+      187,
+      7,
+      119,
+      0,
+      "STRING"
+    ],
+    [
+      423,
+      190,
+      0,
+      147,
+      1,
+      "STRING"
+    ],
+    [
+      424,
+      190,
+      0,
+      188,
+      0,
+      "STRING"
+    ],
+    [
+      425,
+      190,
+      1,
+      173,
+      0,
+      "STRING"
+    ],
+    [
+      426,
+      190,
+      2,
+      148,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.672749994932599,
+      "offset": [
+        -1320.2387530284686,
+        204.0966866871853
+      ]
+    },
+    "node_versions": {
+      "comfy-core": "0.3.12",
+      "ComfyUI-Custom-Scripts": "bc8922deff73f59311c05cef27b9d4caaf43e87b",
+      "ComfyUI-Logic": "42d4f3df45fb7f0dd6e2201a14c07d4dd09f235d"
+    },
+    "ue_links": []
+  },
+  "version": 0.4
+}

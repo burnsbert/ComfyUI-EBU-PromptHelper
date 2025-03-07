@@ -34,6 +34,9 @@ See the included workflow `flux_example_ebu_prompthelper.json` for usage example
 - **Season, Weather, and Time-of-Day Generation:**
   Generate abstract datetime and weather descriptions with advanced options for skewing the random selection of both year and time-of-day.
 
+ - **Truncate at Substring:**
+  Truncate a string before or after a substring
+
 ## Installation
 
 1. **Copy Files:**
@@ -179,6 +182,82 @@ Generates random datetime and weather descriptions.
 - `when` (STRING): Full datetime description (e.g., "early morning during early winter of 2020")
 - `when_no_year` (STRING): Description without year (e.g., "early morning during early winter")
 - `weather` (STRING): Weather description
+
+### EBU PromptHelper Truncate
+
+This node modifies an input prompt by truncating it at the first occurrence of a specified substring. It offers options to remove everything either **before** or **after** the substring, with the choice to include or exclude the substring itself in the deletion. This is particularly useful for dynamically trimming a prompt based on a specific marker.
+
+#### Inputs
+
+- **prompt** (STRING): The input prompt text (multiline supported).
+- **substring** (STRING): The target substring to search for within the prompt.
+- **delete_option** (STRING): Dropdown selection with two options:
+  - **delete before**: Removes all text that appears before the substring.
+  - **delete after**: Removes all text that appears after the substring.
+- **inclusive** (BOOLEAN): Toggle that determines whether the substring itself is removed:
+  - **True**: The substring is removed along with the text.
+  - **False**: The substring is preserved.
+
+#### Returns
+
+- **modified_prompt** (STRING): The prompt after the specified truncation has been applied.
+
+#### Examples
+
+1. **Example 1: Delete before (inclusive)**
+
+   - **Input:**
+     - `prompt`: `"Hello world, welcome to the party!"`
+     - `substring`: `"welcome"`
+     - `delete_option`: `"delete before"`
+     - `inclusive`: `True`
+     
+   - **Output:**  
+     `" to the party!"`  
+     
+     *Explanation:* Everything before and including `"welcome"` is removed.
+
+2. **Example 2: Delete before (non-inclusive)**
+
+   - **Input:**
+     - `prompt`: `"Hello world, welcome to the party!"`
+     - `substring`: `"welcome"`
+     - `delete_option`: `"delete before"`
+     - `inclusive`: `False`
+     
+   - **Output:**  
+     `"welcome to the party!"`  
+     
+     *Explanation:* Only the text before `"welcome"` is removed; the substring remains.
+
+3. **Example 3: Delete after (inclusive)**
+
+   - **Input:**
+     - `prompt`: `"The meeting will start at 3pm, please be on time."`
+     - `substring`: `"at 3pm"`
+     - `delete_option`: `"delete after"`
+     - `inclusive`: `True`
+     
+   - **Output:**  
+     `"The meeting will start "`  
+     
+     *Explanation:* Everything after and including `"at 3pm"` is removed.
+
+4. **Example 4: Delete after (non-inclusive)**
+
+   - **Input:**
+     - `prompt`: `"The meeting will start at 3pm, please be on time."`
+     - `substring`: `"at 3pm"`
+     - `delete_option`: `"delete after"`
+     - `inclusive`: `False`
+     
+   - **Output:**  
+     `"The meeting will start at 3pm"`  
+     
+     *Explanation:* Only the text after `"at 3pm"` is removed; the substring remains.
+
+This node integrates seamlessly with other EBU PromptHelper nodes, allowing you to fine-tune and manipulate prompt text dynamically.
+
 
 ## Requirements
 - ComfyUI

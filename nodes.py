@@ -808,6 +808,60 @@ class EbuPromptHelperSeasonWeatherTimeOfDay:
 
         return f"{tod_str} during {season_str} of {random_date_obj.year}"
 
+class EbuPromptHelperTruncate:
+    """
+    EBU PromptHelper Truncate Node
+
+    This node takes a prompt string and a target substring. It removes everything either before or after the first occurrence of the substring.
+    The deletion can be inclusive (removing the substring as well) or exclusive (keeping the substring).
+
+    Inputs:
+      - prompt (STRING): The input prompt.
+      - substring (STRING): The target substring to search for.
+      - delete_option (STRING): Dropdown with options "delete before" or "delete after".
+      - inclusive (BOOLEAN): If True, the substring is removed along with the preceding or following text.
+
+    Returns:
+      - modified_prompt (STRING): The prompt after truncation.
+    """
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "prompt": ("STRING", {"multiline": True, "default": ""}),
+                "substring": ("STRING", {"multiline": False, "default": ""}),
+                "delete_option": (["delete before", "delete after"], {"default": "delete before"}),
+                "inclusive": ("BOOLEAN", {"default": True}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING",)
+    RETURN_NAMES = ("modified_prompt",)
+    FUNCTION = "truncate_prompt"
+    CATEGORY = "Prompts"
+
+    def truncate_prompt(self, prompt, substring, delete_option, inclusive):
+        index = prompt.find(substring)
+        if index == -1:
+            # If the substring is not found, return the original prompt.
+            return (prompt,)
+        if delete_option == "delete before":
+            if inclusive:
+                # Delete everything before and including the substring.
+                return (prompt[index + len(substring):],)
+            else:
+                # Delete everything before but keep the substring.
+                return (prompt[index:],)
+        elif delete_option == "delete after":
+            if inclusive:
+                # Delete everything after and including the substring.
+                return (prompt[:index],)
+            else:
+                # Delete everything after but keep the substring.
+                return (prompt[:index + len(substring)],)
+        else:
+            return (prompt,)
+
 # Node registration mappings.
 NODE_CLASS_MAPPINGS = {
     "EbuPromptHelperCombineTwoStrings": EbuPromptHelperCombineTwoStrings,
@@ -819,6 +873,7 @@ NODE_CLASS_MAPPINGS = {
     "EbuPromptHelperRandomize": EbuPromptHelperRandomize,
     "EbuPromptHelperReplace": EbuPromptHelperReplace,
     "EbuPromptHelperSeasonWeatherTimeOfDay": EbuPromptHelperSeasonWeatherTimeOfDay,
+    "EbuPromptHelperTruncate": EbuPromptHelperTruncate,
 }
 NODE_DISPLAY_NAME_MAPPINGS = {
     "EbuPromptHelperCombineTwoStrings": "EBU PromptHelper Combine Two Strings",
@@ -830,4 +885,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "EbuPromptHelperRandomize": "EBU PromptHelper Randomize",
     "EbuPromptHelperReplace": "EBU PromptHelper Replace",
     "EbuPromptHelperSeasonWeatherTimeOfDay": "EBU PromptHelper Season Weather Time-Of-Day",
+    "EbuPromptHelperTruncate": "EBU PromptHelper Truncate",
 }

@@ -94,7 +94,7 @@ Replaces a target substring with a randomly selected option from a list.
 
 **Inputs:**
 - `prompt_text` (STRING): Input prompt text
-- `word_to_replace` (STRING): Target substring to replace
+- `word_to_replace` (STRING): Target substring to replace (use | as delimiter for multiple)
 - `replacement_options` (STRING): List of possible replacements
 - `random_seed` (INT): Seed for random selection
 - `case_sensitive` (BOOLEAN): Whether to match case when replacing

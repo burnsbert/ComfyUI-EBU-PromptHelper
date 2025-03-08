@@ -366,14 +366,19 @@ class EbuPromptHelperRandomize:
 
         selected = random.choice(options)
 
+        # Handle multiple words using "|"
+        words_to_replace = word_to_replace.split("|")
+
         if case_sensitive:
-            new_prompt = prompt_text.replace(word_to_replace, selected)
+            for word in words_to_replace:
+                prompt_text = prompt_text.replace(word, selected)
         else:
             import re
-            pattern = re.compile(re.escape(word_to_replace), re.IGNORECASE)
-            new_prompt = pattern.sub(selected, prompt_text)
+            for word in words_to_replace:
+                pattern = re.compile(re.escape(word), re.IGNORECASE)
+                prompt_text = pattern.sub(selected, prompt_text)
 
-        return (new_prompt, selected)
+        return (prompt_text, selected)
 
 class EbuPromptHelperCombineTwoStrings:
     """

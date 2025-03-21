@@ -744,16 +744,22 @@ class EbuPromptHelperSeasonWeatherTimeOfDay:
                 return "morning"
             elif 10 <= hour < 12:
                 return "late morning"
-            elif 12 <= hour < 15:
+            elif 12 <= hour < 14:
                 return "early afternoon"
-            elif 15 <= hour < 18:
+            elif 14 <= hour < 16:
+                return "afternoon"
+            elif 16 <= hour < 18:
                 return "late afternoon"
             elif 18 <= hour < 20:
                 return "early evening"
             elif 20 <= hour < 22:
                 return "evening"
-            elif 22 <= hour or hour < 5:
+            elif 22 <= hour or hour < 3:
                 return "night"
+            elif 3 <= hour or hour < 4:
+                return "witching hour"
+            elif 4 <= hour or hour < 5:
+                return "pre-dawn"
             else:
                 return "unknown time"
 
@@ -793,24 +799,25 @@ class EbuPromptHelperSeasonWeatherTimeOfDay:
                 else:
                     return f"middle of the {season}"
 
-        # Convert time strings to datetime objects.
-        time_from_dt = time_str_to_dt(time_from)
-        time_to_dt = time_str_to_dt(time_to)
-        if time_from_dt > time_to_dt:
-            raise ValueError("time_from must be before time_to")
-
-        # Generate a random date using the year skew.
-        random_date_obj = random_date(year_from, year_to, year_skew)
-
-        # Calculate the total seconds in the time window and generate a skewed random second offset.
+        # --- Main body of generate_random_datetime ---
+        base_date = datetime(2000, 1, 1)
+        time_from_dt = datetime.combine(base_date.date(), time_str_to_dt(time_from).time())
+        time_to_dt = datetime.combine(base_date.date(), time_str_to_dt(time_to).time())
+        if time_from_dt == time_to_dt:
+            # Full 24-hour range (ensuring we don't end up with zero seconds)
+            time_to_dt += timedelta(days=1)
+        elif time_to_dt < time_from_dt:
+            # Handle cross-midnight range
+            time_to_dt += timedelta(days=1)
         total_seconds = int((time_to_dt - time_from_dt).total_seconds())
+        if total_seconds <= 0:
+            raise ValueError(f"Invalid time range: '{time_from}' to '{time_to}' resulted in {total_seconds} seconds")
+        random_date_obj = random_date(year_from, year_to, year_skew)
         sec_offset = generate_skewed_random(0, total_seconds, time_of_day_skew)
-        random_time = time_from_dt + timedelta(seconds=sec_offset)
-
-        # Determine the descriptive strings.
+        random_time_dt = time_from_dt + timedelta(seconds=sec_offset)
+        random_time = random_time_dt.time()  # extract just the time
         tod_str = get_time_of_day(random_time.hour)
         season_str = get_season_part(random_date_obj.month)
-
         return f"{tod_str} during {season_str} of {random_date_obj.year}"
 
 class EbuPromptHelperTruncate:

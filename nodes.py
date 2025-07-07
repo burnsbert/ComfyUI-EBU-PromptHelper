@@ -14,6 +14,49 @@ from .make_palette_modified_compound import generate_modified_compound_palette_f
 from .make_palette_split_complementary import generate_split_complementary_palette_4, generate_split_complementary_palette_5
 from .make_palette_triadic import generate_four_color_palette, generate_triadic_palette_5
 
+
+# Import weighted option lists for female character describer
+from .eyes_female import WEIGHTED_OPTIONS as EYES_OPTIONS
+from .nose_female import WEIGHTED_OPTIONS as NOSE_OPTIONS
+from .mouth_female import WEIGHTED_OPTIONS as MOUTH_OPTIONS
+from .lips_female import WEIGHTED_OPTIONS as LIPS_OPTIONS
+from .face_shape_female import WEIGHTED_OPTIONS as FACE_SHAPE_OPTIONS
+from .brow_female import WEIGHTED_OPTIONS as BROW_OPTIONS
+from .ears_female import WEIGHTED_OPTIONS as EARS_OPTIONS
+from .cheekbones_female import WEIGHTED_OPTIONS as CHEEKBONES_OPTIONS
+from .cheeks_female import WEIGHTED_OPTIONS as CHEEKS_OPTIONS
+from .chin_female import WEIGHTED_OPTIONS as CHIN_OPTIONS
+from .skin_female import WEIGHTED_OPTIONS as SKIN_OPTIONS
+from .neck_female import WEIGHTED_OPTIONS as NECK_OPTIONS
+from .accessories_female import WEIGHTED_OPTIONS as ACCESSORIES_OPTIONS
+from .expression_female import WEIGHTED_OPTIONS as EXPRESSION_OPTIONS
+from .hair_female        import STYLE_OPTIONS, COLOR_OPTIONS
+from .makeup_female import WEIGHTED_OPTIONS as MAKEUP_OPTIONS
+
+# Male trait lists aliased so they never collide with the female ones:
+from .eyes_male                  import WEIGHTED_OPTIONS as MALE_EYES_OPTIONS
+from .nose_male                  import WEIGHTED_OPTIONS as MALE_NOSE_OPTIONS
+from .mouth_male                 import WEIGHTED_OPTIONS as MALE_MOUTH_OPTIONS
+from .face_shape_male            import WEIGHTED_OPTIONS as MALE_FACE_SHAPE_OPTIONS
+from .brow_male                  import WEIGHTED_OPTIONS as MALE_BROW_OPTIONS
+from .ears_male                  import WEIGHTED_OPTIONS as MALE_EARS_OPTIONS
+from .cheeks_cheekbones_male     import WEIGHTED_OPTIONS as MALE_CHEEKS_CHEEKBONES_OPTIONS
+from .chin_male                  import WEIGHTED_OPTIONS as MALE_CHIN_OPTIONS
+from .skin_male                  import WEIGHTED_OPTIONS as MALE_SKIN_OPTIONS
+from .neck_male                  import WEIGHTED_OPTIONS as MALE_NECK_OPTIONS
+from .accessories_male           import WEIGHTED_OPTIONS as MALE_ACCESSORIES_OPTIONS
+from .facial_hair_male           import WEIGHTED_OPTIONS as MALE_FACIAL_HAIR_OPTIONS
+from .expression_male            import WEIGHTED_OPTIONS as MALE_EXPRESSION_OPTIONS
+
+# Hair has two separate lists, so alias them both:
+from .hair_male                  import STYLE_OPTIONS  as MALE_HAIR_STYLE_OPTIONS, \
+                                        COLOR_OPTIONS  as MALE_HAIR_COLOR_OPTIONS
+
+def pick_weighted(options, seed):
+    random.seed(seed)
+    descs, weights = zip(*options)
+    return random.choices(descs, weights)[0]
+
 class EbuPromptHelperRandomColorPalette:
     """
     EBU Random Color Palette Generator Node
@@ -337,7 +380,7 @@ class EbuPromptHelperRandomize:
                 "prompt_text": ("STRING", {"multiline": True, "default": ""}),
                 "word_to_replace": ("STRING", {"multiline": False, "default": ""}),
                 "replacement_options": ("STRING", {"multiline": True, "default": ""}),
-                "seed": ("INT", {"default": 0, "step": 1, "display": "number"}),
+                "seed": ("INT", {"default": 0, "step": 1, "min": 0, "max": 0xffffffffffffffff, "display": "number"}),
                 "case_sensitive": ("BOOLEAN", {"default": True}),
                 "delimit_options_with": (["newlines", "commas", "semi-colons"], {"default": "newlines"})
             }
@@ -874,28 +917,195 @@ class EbuPromptHelperTruncate:
         else:
             return (prompt,)
 
+class EbuPromptHelperCharacterDescriberFemale:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "seed":           ("INT",     {"default": 0,    "min": 0,                         "max": 0xffffffffffffffff}),
+                "eyes_enabled":   ("BOOLEAN", {"default": True}),
+                "nose_enabled":   ("BOOLEAN", {"default": True}),
+                "mouth_enabled":  ("BOOLEAN", {"default": True}),
+                "lips_enabled":   ("BOOLEAN", {"default": True}),
+                "face_shape_enabled": ("BOOLEAN", {"default": True}),
+                "brow_enabled":   ("BOOLEAN", {"default": True}),
+                "ears_enabled":   ("BOOLEAN", {"default": True}),
+                "cheekbones_enabled": ("BOOLEAN", {"default": True}),
+                "cheeks_enabled": ("BOOLEAN", {"default": True}),
+                "chin_enabled":   ("BOOLEAN", {"default": True}),
+                "skin_enabled":   ("BOOLEAN", {"default": True}),
+                "makeup_enabled": ("BOOLEAN", {"default": False}),
+                "neck_enabled":   ("BOOLEAN", {"default": False}),
+                "accessories_enabled": ("BOOLEAN", {"default": False}),
+            }
+        }
+
+    # Now returning 4 strings instead of 3
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("face_description", "hair_style", "hair_color", "facial_expression")
+    FUNCTION = "generate"
+    CATEGORY = "EBU PromptHelper"
+
+    @staticmethod
+    def generate(seed,
+                 eyes_enabled, nose_enabled, mouth_enabled, lips_enabled,
+                 face_shape_enabled, brow_enabled, ears_enabled,
+                 cheekbones_enabled, cheeks_enabled, chin_enabled,
+                 skin_enabled, makeup_enabled, neck_enabled, accessories_enabled):
+
+        lines = []
+        if eyes_enabled:
+            lines.append(f"Eyes: {pick_weighted(EYES_OPTIONS, seed + 1)}")
+        if nose_enabled:
+            lines.append(f"Nose: {pick_weighted(NOSE_OPTIONS, seed + 2)}")
+        if mouth_enabled:
+            lines.append(f"Mouth: {pick_weighted(MOUTH_OPTIONS, seed + 3)}")
+        if lips_enabled:
+            lines.append(f"Lips: {pick_weighted(LIPS_OPTIONS, seed + 4)}")
+        if face_shape_enabled:
+            lines.append(f"Face Shape: {pick_weighted(FACE_SHAPE_OPTIONS, seed + 5)}")
+        if brow_enabled:
+            lines.append(f"Eyebrows & Forehead: {pick_weighted(BROW_OPTIONS, seed + 6)}")
+        if ears_enabled:
+            lines.append(f"Ears: {pick_weighted(EARS_OPTIONS, seed + 7)}")
+        if cheekbones_enabled:
+            lines.append(f"Cheekbones: {pick_weighted(CHEEKBONES_OPTIONS, seed + 8)}")
+        if cheeks_enabled:
+            lines.append(f"Cheeks: {pick_weighted(CHEEKS_OPTIONS, seed + 9)}")
+        if chin_enabled:
+            lines.append(f"Chin/Jaw: {pick_weighted(CHIN_OPTIONS, seed + 10)}")
+        if skin_enabled:
+            lines.append(f"Skin: {pick_weighted(SKIN_OPTIONS, seed + 11)}")
+        if makeup_enabled:
+            lines.append(f"Makeup: {pick_weighted(MAKEUP_OPTIONS, seed + 12)}")
+        if neck_enabled:
+            lines.append(f"Neck: {pick_weighted(NECK_OPTIONS, seed + 13)}")
+        if accessories_enabled:
+            lines.append(f"Accessories: {pick_weighted(ACCESSORIES_OPTIONS, seed + 14)}")
+
+        face_description     = "\n".join(lines)
+        hair_style           = pick_weighted(STYLE_OPTIONS, seed + 15)
+        hair_color           = pick_weighted(COLOR_OPTIONS, seed + 16)
+        facial_expression    = pick_weighted(EXPRESSION_OPTIONS, seed + 17)
+
+        return face_description, hair_style, hair_color, facial_expression
+
+# Alias all male option lists to avoid collisions
+from .eyes_male                   import WEIGHTED_OPTIONS as MALE_EYES_OPTIONS
+from .nose_male                   import WEIGHTED_OPTIONS as MALE_NOSE_OPTIONS
+from .mouth_male                  import WEIGHTED_OPTIONS as MALE_MOUTH_OPTIONS
+from .face_shape_male             import WEIGHTED_OPTIONS as MALE_FACE_SHAPE_OPTIONS
+from .brow_male                   import WEIGHTED_OPTIONS as MALE_BROW_OPTIONS
+from .ears_male                   import WEIGHTED_OPTIONS as MALE_EARS_OPTIONS
+from .cheeks_cheekbones_male      import WEIGHTED_OPTIONS as MALE_CHEEKS_CHEEKBONES_OPTIONS
+from .chin_male                   import WEIGHTED_OPTIONS as MALE_CHIN_OPTIONS
+from .skin_male                   import WEIGHTED_OPTIONS as MALE_SKIN_OPTIONS
+from .neck_male                   import WEIGHTED_OPTIONS as MALE_NECK_OPTIONS
+from .accessories_male            import WEIGHTED_OPTIONS as MALE_ACCESSORIES_OPTIONS
+from .facial_hair_male            import WEIGHTED_OPTIONS as MALE_FACIAL_HAIR_OPTIONS
+from .expression_male             import WEIGHTED_OPTIONS as MALE_EXPRESSION_OPTIONS
+from .hair_male                   import STYLE_OPTIONS  as MALE_HAIR_STYLE_OPTIONS, \
+                                        COLOR_OPTIONS  as MALE_HAIR_COLOR_OPTIONS
+
+class EbuPromptHelperCharacterDescriberMale:
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "seed":                          ("INT",     {"default": 0,    "min": 0,                         "max": 0xffffffffffffffff}),
+                "eyes_enabled":                 ("BOOLEAN", {"default": True}),
+                "nose_enabled":                 ("BOOLEAN", {"default": True}),
+                "mouth_enabled":                ("BOOLEAN", {"default": True}),
+                "face_shape_enabled":           ("BOOLEAN", {"default": True}),
+                "brow_enabled":                 ("BOOLEAN", {"default": True}),
+                "ears_enabled":                 ("BOOLEAN", {"default": True}),
+                "cheeks_and_cheekbones_enabled":("BOOLEAN", {"default": False}),
+                "cheekbones_enabled":           ("BOOLEAN", {"default": True}),
+                "chin_enabled":                 ("BOOLEAN", {"default": True}),
+                "skin_enabled":                 ("BOOLEAN", {"default": True}),
+                "neck_enabled":                 ("BOOLEAN", {"default": False}),
+                "accessories_enabled":          ("BOOLEAN", {"default": False}),
+            }
+        }
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("face_description", "hair_style", "hair_color", "facial_hair", "facial_expression")
+    FUNCTION = "generate"
+    CATEGORY = "EBU PromptHelper"
+
+    @staticmethod
+    def generate(seed,
+                 eyes_enabled, nose_enabled, mouth_enabled,
+                 face_shape_enabled, brow_enabled, ears_enabled,
+                 cheeks_and_cheekbones_enabled, cheekbones_enabled,
+                 chin_enabled, skin_enabled,
+                 neck_enabled, accessories_enabled):
+
+        lines = []
+        if eyes_enabled:
+            lines.append(f"Eyes: {pick_weighted(MALE_EYES_OPTIONS, seed+1)}")
+        if nose_enabled:
+            lines.append(f"Nose: {pick_weighted(MALE_NOSE_OPTIONS, seed+2)}")
+        if mouth_enabled:
+            lines.append(f"Mouth: {pick_weighted(MALE_MOUTH_OPTIONS, seed+3)}")
+        if face_shape_enabled:
+            lines.append(f"Face Shape: {pick_weighted(MALE_FACE_SHAPE_OPTIONS, seed+4)}")
+        if brow_enabled:
+            lines.append(f"Eyebrows & Forehead: {pick_weighted(MALE_BROW_OPTIONS, seed+5)}")
+        if ears_enabled:
+            lines.append(f"Ears: {pick_weighted(MALE_EARS_OPTIONS, seed+6)}")
+
+        # Combined cheeks & cheekbones
+        if cheeks_and_cheekbones_enabled:
+            lines.append(f"Cheeks & Cheekbones: {pick_weighted(MALE_CHEEKS_CHEEKBONES_OPTIONS, seed+7)}")
+        elif cheekbones_enabled:
+            lines.append(f"Cheekbones: {pick_weighted(MALE_CHEEKS_CHEEKBONES_OPTIONS, seed+7)}")
+
+        if chin_enabled:
+            lines.append(f"Chin/Jaw: {pick_weighted(MALE_CHIN_OPTIONS, seed+8)}")
+        if skin_enabled:
+            lines.append(f"Skin: {pick_weighted(MALE_SKIN_OPTIONS, seed+9)}")
+        if neck_enabled:
+            lines.append(f"Neck: {pick_weighted(MALE_NECK_OPTIONS, seed+10)}")
+        if accessories_enabled:
+            lines.append(f"Accessories: {pick_weighted(MALE_ACCESSORIES_OPTIONS, seed+11)}")
+
+        face_description  = "\n".join(lines)
+        hair_style        = pick_weighted(MALE_HAIR_STYLE_OPTIONS, seed+12)
+        hair_color        = pick_weighted(MALE_HAIR_COLOR_OPTIONS, seed+13)
+        facial_hair       = pick_weighted(MALE_FACIAL_HAIR_OPTIONS, seed+14)
+        facial_expression = pick_weighted(MALE_EXPRESSION_OPTIONS, seed+15)
+
+        return face_description, hair_style, hair_color, facial_hair, facial_expression
+
 # Node registration mappings.
 NODE_CLASS_MAPPINGS = {
-    "EbuPromptHelperCombineTwoStrings": EbuPromptHelperCombineTwoStrings,
-    "EbuPromptHelperConsumeListItem": EbuPromptHelperConsumeListItem,
-    "EbuPromptHelperCurrentDateTime": EbuPromptHelperCurrentDateTime,
-    "EbuPromptHelperListSampler": EbuPromptHelperListSampler,
-    "EbuPromptHelperLoadFileAsString": EbuPromptHelperLoadFileAsString,
-    "EbuPromptHelperRandomColorPalette": EbuPromptHelperRandomColorPalette,
-    "EbuPromptHelperRandomize": EbuPromptHelperRandomize,
-    "EbuPromptHelperReplace": EbuPromptHelperReplace,
-    "EbuPromptHelperSeasonWeatherTimeOfDay": EbuPromptHelperSeasonWeatherTimeOfDay,
-    "EbuPromptHelperTruncate": EbuPromptHelperTruncate,
+    "EbuPromptHelperCombineTwoStrings":           EbuPromptHelperCombineTwoStrings,
+    "EbuPromptHelperConsumeListItem":             EbuPromptHelperConsumeListItem,
+    "EbuPromptHelperCurrentDateTime":             EbuPromptHelperCurrentDateTime,
+    "EbuPromptHelperListSampler":                 EbuPromptHelperListSampler,
+    "EbuPromptHelperLoadFileAsString":            EbuPromptHelperLoadFileAsString,
+    "EbuPromptHelperRandomColorPalette":          EbuPromptHelperRandomColorPalette,
+    "EbuPromptHelperRandomize":                   EbuPromptHelperRandomize,
+    "EbuPromptHelperReplace":                     EbuPromptHelperReplace,
+    "EbuPromptHelperSeasonWeatherTimeOfDay":      EbuPromptHelperSeasonWeatherTimeOfDay,
+    "EbuPromptHelperTruncate":                    EbuPromptHelperTruncate,
+    "EbuPromptHelperCharacterDescriberFemale":    EbuPromptHelperCharacterDescriberFemale,
+    "EbuPromptHelperCharacterDescriberMale":      EbuPromptHelperCharacterDescriberMale,
 }
+
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "EbuPromptHelperCombineTwoStrings": "EBU PromptHelper Combine Two Strings",
-    "EbuPromptHelperConsumeListItem": "EBU PromptHelper Consume List Item",
-    "EbuPromptHelperCurrentDateTime": "EBU PromptHelper Current DateTime",
-    "EbuPromptHelperListSampler": "EBU PromptHelper List Sampler",
-    "EbuPromptHelperLoadFileAsString": "EBU PromptHelper Load File as String",
-    "EbuPromptHelperRandomColorPalette": "EBU PromptHelper Color Palette",
-    "EbuPromptHelperRandomize": "EBU PromptHelper Randomize",
-    "EbuPromptHelperReplace": "EBU PromptHelper Replace",
-    "EbuPromptHelperSeasonWeatherTimeOfDay": "EBU PromptHelper Season Weather Time-Of-Day",
-    "EbuPromptHelperTruncate": "EBU PromptHelper Truncate",
+    "EbuPromptHelperCombineTwoStrings":           "EBU PromptHelper Combine Two Strings",
+    "EbuPromptHelperConsumeListItem":             "EBU PromptHelper Consume List Item",
+    "EbuPromptHelperCurrentDateTime":             "EBU PromptHelper Current DateTime",
+    "EbuPromptHelperListSampler":                 "EBU PromptHelper List Sampler",
+    "EbuPromptHelperLoadFileAsString":            "EBU PromptHelper Load File as String",
+    "EbuPromptHelperRandomColorPalette":          "EBU PromptHelper Color Palette",
+    "EbuPromptHelperRandomize":                   "EBU PromptHelper Randomize",
+    "EbuPromptHelperReplace":                     "EBU PromptHelper Replace",
+    "EbuPromptHelperSeasonWeatherTimeOfDay":      "EBU PromptHelper Season Weather Time-Of-Day",
+    "EbuPromptHelperTruncate":                    "EBU PromptHelper Truncate",
+    "EbuPromptHelperCharacterDescriberFemale":    "EBU PromptHelper Character Describer Female",
+    "EbuPromptHelperCharacterDescriberMale":      "EBU PromptHelper Character Describer Male",
 }
+

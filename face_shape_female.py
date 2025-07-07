@@ -1,0 +1,35 @@
+# face_shape_female.py
+
+# Static weighted options for female character describer: face shape variations
+WEIGHTED_OPTIONS = [
+    ("oval face with balanced proportions", 5),
+    ("heart-shaped face with pronounced cheekbones and narrow chin", 4),
+    ("round face with gentle curves", 4),
+    ("square face with defined jawline and forehead", 3),
+    ("diamond-shaped face with high cheekbones and narrow forehead and chin", 3),
+    ("long, oblong face with subtle jaw definition", 2),
+    ("rectangular face with elongated proportions and soft edges", 2),
+    ("triangular face with broad forehead narrowing to a pointed chin", 2),
+    ("pear-shaped face with softer forehead and slightly wider jawline", 1),
+    ("inverted triangle face with broad cheekbones and slim lower face", 1),
+    ("softly angular face with gentle lines and minimal sharp angles", 3),
+    ("prominent cheekbone structure with narrow jawline", 4),
+    ("delicate jawline blending into softly curved cheeks", 4),
+    ("chiseled jawline with balanced facial height and width", 2),
+    ("slender oval face with a gentle tapering towards the chin", 3),
+    ("broad square face emphasizing strong facial angles", 2),
+    ("soft round outline with youthful fullness", 4),
+    ("elongated diamond face with a high forehead and narrow chin", 2),
+    ("gentle rectangular face shape with minimal angles and smooth contours", 2),
+    ("petite square face with soft, rounded corners", 1),
+    ("soft triangular face shape with delicate, tapered chin", 1),
+    # Additional variations
+    ("teardrop-shaped face with narrow forehead and softly rounded jaw", 2),
+    ("soft trapezoidal face with gentle jawline and refined forehead", 2),
+    ("elongated oval face with high, softly curved forehead", 2),
+    ("petite heart face with subtle cheek fullness and pointed chin", 3),
+    ("soft v-shaped chin with gently angled cheeks", 2),
+    ("slender rectangular face with feminine softness at the edges", 2),
+    ("triangular face with broad temples tapering to a refined chin", 2),
+    ("oval face with softly defined jaw and delicate cheek slope", 3),
+]

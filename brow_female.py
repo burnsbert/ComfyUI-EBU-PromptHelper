@@ -1,0 +1,36 @@
+# brow_female.py
+
+# Static weighted options for female character describer: eyebrow and forehead shape variations
+WEIGHTED_OPTIONS = [
+    ("soft natural eyebrows with a gentle arch", 5),
+    ("medium-thick eyebrows with a defined arch", 5),
+    ("arched eyebrows tapering into a fine tail", 4),
+    ("feathered eyebrows with visible hair strokes", 4),
+    ("full eyebrows with softly rounded tops", 4),
+    ("slim eyebrows with a subtle gradient", 3),
+    ("soft straight eyebrows with slight taper", 3),
+    ("angled eyebrows with a pronounced peak", 3),
+    ("low-arched eyebrows with a gentle slope", 3),
+    ("high-arched eyebrows with dramatic curve", 2),
+    ("thin eyebrows with a high arch point", 2),
+    ("sharp angled eyebrows with a defined vertex", 2),
+    ("rounded eyebrows with soft contours", 3),
+    ("natural unkempt eyebrows with fine hairs", 1),
+    ("tidy sculpted eyebrows with clean lines", 2),
+    ("fluffy eyebrows with thick density and soft edges", 3),
+    ("straight eyebrows with minimal arch and uniform thickness", 2),
+    ("thick eyebrows with a bold, dense look", 1),
+    ("soft tapered eyebrows with a feathered tail", 4),
+    ("elegant eyebrows with a pronounced under-curve at the arch", 2),
+    # Forehead options
+    ("high, broad forehead with smooth contour", 3),
+    ("low hairline forehead with graceful slope", 2),
+    ("narrow forehead tapering gently to eyebrow ridge", 2),
+    ("wide forehead balanced by softly arching eyebrows", 2),
+    ("smooth forehead with subtle bone structure", 2),
+    ("prominent forehead ridge adding classic elegance", 1),
+    ("forehead with a gentle widow's peak", 1),
+    ("gently sloping forehead with soft transitions", 2),
+    ("broad forehead with subtle horizontal contours", 1),
+    ("high forehead accentuating facial length", 2),
+]

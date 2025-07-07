@@ -1,0 +1,31 @@
+# lips_female.py
+
+# Static weighted options for female character describer: lip shape and fullness variations (no makeup or color references)
+WEIGHTED_OPTIONS = [
+    ("full, plush lips with a defined cupid's bow", 5),
+    ("heart-shaped lips with pronounced upper peaks", 4),
+    ("softly curved lips with natural volume", 4),
+    ("thin, delicate lips with subtle contour", 2),
+    ("pouty lower lip balanced by a gentle upper lip", 3),
+    ("bow-shaped lips with soft peaks at the center", 3),
+    ("full lips with a smooth, rounded outline", 4),
+    ("narrow lips with refined edges", 2),
+    ("medium-full lips with even thickness", 4),
+    ("slightly asymmetrical lips adding character", 2),
+    ("natural lips with gentle softness and minimal definition", 3),
+    ("slightly parted lips hinting at quiet confidence", 3),
+    ("wide smile lips with subtle corner creases", 3),
+    ("petite lips with a finely arched cupid's bow", 3),
+    ("softly plump lips with gentle curves", 4),
+    ("thin lips with a crisp, elegant outline", 2),
+    ("bowed upper lip contrasting a fuller lower lip", 3),
+    ("slender lips with a smooth, continuous edge", 2),
+    ("balanced lips with a symmetrical shape", 4),
+    ("lips with a slight natural asymmetry for charm", 2),
+    ("full lower lip paired with a subtle upper lip", 3),
+    ("lips with a gentle inverted arch at the center", 3),
+    ("kissable lips with a well-defined outline", 3),
+    ("lips with fine vertical creases for natural texture", 2),
+    ("soft lip creases hinting at subtle expression", 2),
+    ("petite lips with understated contour lines", 2),
+]

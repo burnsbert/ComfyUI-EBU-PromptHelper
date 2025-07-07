@@ -1,0 +1,35 @@
+# chin_female.py
+
+# Static weighted options for female character describer: chin and jaw shape variations
+WEIGHTED_OPTIONS = [
+    ("delicate, softly rounded chin blending into a gentle jawline", 5),
+    ("slightly pointed chin adding gentle definition to the jaw", 4),
+    ("subtly cleft chin with refined indentation", 1),
+    ("rounded chin merging smoothly with a soft jawline", 4),
+    ("tapered chin creating a gentle V-shape transitioning to the jaw", 3),
+    ("softly contoured chin with minimal prominence and balanced jaw", 4),
+    ("narrow chin complementing slender facial proportions and jawline", 3),
+    ("slightly pronounced chin adding character, flowing into a defined jaw", 2),
+    ("smooth, unbroken chin line with a soft jaw slope", 4),
+    ("soft U-shaped chin with balanced width and a gentle jaw curve", 3),
+    ("slight dimple at the center of the chin above a subtle jaw contour", 3),
+    ("modest chin projection for subtle definition with a refined jaw", 3),
+    ("rounded chin with gentle curvature at the base of the jaw", 2),
+    ("gentle tapering chin with soft edge into a smooth jawline", 3),
+    ("balanced chin matching forehead width and a harmonious jaw", 2),
+    ("refined chin with subtle natural shadowing and jawline highlight", 2),
+    ("compact chin enhancing facial harmony with a delicate jaw", 3),
+    ("softly receding chin for a gentle profile and rounded jaw", 1),
+    ("slender pointed chin lending elegance with a sculpted jawline", 2),
+    ("rounded chin with slight curvature at the base and smooth jaw edges", 3),
+    # Jaw-specific variations
+    ("defined jawline with elegant angles and a refined chin", 3),
+    ("strong yet feminine jawline tapering into a gentle chin", 2),
+    ("soft jawline with subtle prominence complementing chin shape", 3),
+    ("delicate jaw arch accentuating the chin's natural contour", 2),
+    ("sculpted jawline with softly rounded edges", 2),
+    ("subtle jaw definition with a smooth, continuous line", 3),
+    ("elegantly tapered jawline highlighting facial harmony", 2),
+    ("youthful chin and jaw blending seamlessly for softness", 3),
+    ("strong-curve jawline softened by gentle chin taper", 2),
+]

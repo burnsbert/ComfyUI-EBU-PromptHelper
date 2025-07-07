@@ -274,7 +274,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ### EBU PromptHelper Character Describer Female
 
-Randomly generates a detailed facial description of a female character. Extremely imperfect and limited but will help you spin up quicky for colorful descriptions.
+Randomly generates a detailed facial description of a female character, focusing on customizable appearance traits. Designed for young women in their early 20s.
 
 **Inputs:**
 - `seed` (INT): Random seed (0 for non-deterministic).
@@ -290,7 +290,7 @@ Randomly generates a detailed facial description of a female character. Extremel
 
 ### EBU PromptHelper Character Describer Male
 
-Randomly generates a detailed facial and hair description of a male character with optional facial hair.  Extremely imperfect and limited but will help you spin up quicky for colorful descriptions.
+Randomly generates a detailed facial and hair description of a male character with optional facial hair. Suitable for a wide age range of male characters.
 
 **Inputs:**
 - `seed` (INT): Random seed (0 for non-deterministic).

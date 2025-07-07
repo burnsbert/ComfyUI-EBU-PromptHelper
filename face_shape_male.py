@@ -1,0 +1,37 @@
+# face_shape_male.py
+
+# Static weighted options for male character describer: overall face shape and bone structure variations
+WEIGHTED_OPTIONS = [
+    ("strong square jaw and forehead with minimal taper", 5),
+    ("rectangular face with high forehead and firm jawline", 4),
+    ("oval face with slightly rounded jaw and temples", 4),
+    ("round face with soft cheeks and subtle jaw definition", 3),
+    ("diamond-shaped face with prominent cheekbones and narrow forehead", 2),
+    ("heart-shaped face with broad forehead and tapered chin", 2),
+    ("triangular face with wide jaw and narrow forehead", 2),
+    ("oblong face with long proportions and square jaw", 3),
+    ("chiseled jawline with angular cheekbones", 5),
+    ("soft jaw contour with gently rounded chin", 3),
+    ("broad forehead tapering to a defined chin", 4),
+    ("narrow forehead and strong chin prominence", 2),
+    ("prominent cheekbones with balanced jaw width", 3),
+    ("wide cheekbones with a subtle taper to jaw", 3),
+    ("strong jaw and square chin with slight cleft", 4),
+    ("long face with high cheekbones and firm jaw", 3),
+    ("balanced oval-proportioned face with soft angles", 4),
+    ("angular face with sharp temple-to-chin lines", 3),
+    ("broad square face with minimal forehead taper", 4),
+    ("slender face with high temples and defined jaw", 2),
+    ("prominent jawline with a slight widow's peak hairline", 2),
+    ("wide forehead and narrow cheek area", 1),
+    ("soft rectangular face with gentle jaw edges", 2),
+    ("long triangular face with pointed chin", 1),
+    ("diamond face with narrow forehead and chin", 1),
+    # Additional variants
+    ("broad square face with heavy brow ridges", 3),
+    ("elongated face with narrow jawline", 2),
+    ("diamond face with strong angular jaw", 3),
+    ("oval face with gentle taper to jaw", 3),
+    ("square face with chin prominence", 3),
+    ("rectangular face with flat top and sharp angles", 2),
+]

@@ -334,7 +334,7 @@ class EbuPromptHelperReplace:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("updated_prompt_text",)
     FUNCTION = "replace_text"
-    CATEGORY = "Example"
+    CATEGORY = "Prompts"
 
     def replace_text(self, prompt_text, word_to_replace, replace_with, case_sensitive):
         if not word_to_replace.strip():
@@ -512,7 +512,7 @@ class EbuPromptHelperListSampler:
 
     RETURN_TYPES = ("STRING",)
     FUNCTION = "sample_list"
-    CATEGORY = "utils"
+    CATEGORY = "Prompts"
 
     def sample_list(self, list, seed, number_of_elements=10, number_sampled_list=False):
         # Split the input string into lines.
@@ -665,7 +665,7 @@ class EbuPromptHelperConsumeListItem:
     RETURN_TYPES = ("STRING", "STRING", "STRING")
     RETURN_NAMES = ("updated_prompt_text", "word_selected", "revised_list")
     FUNCTION = "consume_list_item"
-    CATEGORY = "utils"
+    CATEGORY = "Prompts"
 
     def consume_list_item(self, word_to_replace, list, seed, prompt_text=""):
         # Split the input string into a list of options using newlines.
@@ -742,7 +742,7 @@ class EbuPromptHelperSeasonWeatherTimeOfDay:
     RETURN_TYPES = ("STRING", "STRING", "STRING")
     RETURN_NAMES = ("when", "when_no_year", "weather")
     FUNCTION = "generate_info"
-    CATEGORY = "Example"
+    CATEGORY = "Prompts"
 
     def generate_info(self, year_from, year_to, time_from, time_to, seed, year_skew, time_of_day_skew):
         random.seed(seed)
@@ -944,7 +944,7 @@ class EbuPromptHelperCharacterDescriberFemale:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING")
     RETURN_NAMES = ("face_description", "hair_style", "hair_color", "facial_expression")
     FUNCTION = "generate"
-    CATEGORY = "EBU PromptHelper"
+    CATEGORY = "Prompts"
 
     @staticmethod
     def generate(seed,
@@ -1031,7 +1031,7 @@ class EbuPromptHelperCharacterDescriberMale:
     RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
     RETURN_NAMES = ("face_description", "hair_style", "hair_color", "facial_hair", "facial_expression")
     FUNCTION = "generate"
-    CATEGORY = "EBU PromptHelper"
+    CATEGORY = "Prompts"
 
     @staticmethod
     def generate(seed,

@@ -94,7 +94,7 @@ Replaces a target substring with a randomly selected option from a list.
 
 **Inputs:**
 - `prompt_text` (STRING): Input prompt text
-- `word_to_replace` (STRING): Target substring to replace (use | as delimiter for multiple)
+- `word_to_replace` (STRING): Target substring to replace (you can include multiple strings to match separated by |, e.g. 'red|blue|yellow')
 - `replacement_options` (STRING): List of possible replacements
 - `random_seed` (INT): Seed for random selection
 - `case_sensitive` (BOOLEAN): Whether to match case when replacing
@@ -103,6 +103,14 @@ Replaces a target substring with a randomly selected option from a list.
 **Returns:**
 - `updated_prompt_text` (STRING): The modified prompt
 - `word_selected` (STRING): The chosen replacement
+
+
+**Weighted Options:**
+- Prefix any option with `N>>` (where `N` is an integer) to weight it `N` times. So '3>>>red' would be the same as listing 'red' 3 times.
+
+**Returns:**
+- `updated_prompt_text` (STRING): The modified prompt.
+- `word_selected` (STRING): The chosen replacement.
 
 ### EBU PromptHelper Combine Two Strings
 
@@ -155,7 +163,7 @@ Returns the current date/time in various formats.
 Selects and removes an item from a list while updating a prompt.
 
 **Inputs:**
-- `word_to_replace` (STRING): Target substring to replace
+- `word_to_replace` (STRING): Target substring to replace (you can include multiple strings to match separated by |, e.g. 'red|blue|yellow')
 - `list` (STRING): Newline-separated list of options
 - `seed` (INT): Random seed
 - `prompt_text` (STRING, optional): Input prompt text

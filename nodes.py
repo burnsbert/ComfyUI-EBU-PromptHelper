@@ -357,7 +357,7 @@ class EbuPromptHelperRandomize:
 
     This node takes an input prompt and replaces occurrences of a specified target substring
     (word_to_replace) with a randomly selected option from a provided string of options.
-    The options string is split based on the chosen delimiter, which can be newlines, commas, or semi‑colons.
+    Supports weighted options: prefix an option with `N>>` (where N is an integer) to weight it N times.
     The seed input controls the random selection, allowing for deterministic output if desired.
 
     Inputs:
@@ -392,34 +392,49 @@ class EbuPromptHelperRandomize:
     CATEGORY = "Prompts"
 
     def randomize_text(self, prompt_text, word_to_replace, replacement_options, seed, case_sensitive, delimit_options_with):
+        import re
+        import random
         random.seed(seed)
 
-        # Split the options string based on the selected delimiter.
+        # Split options based on chosen delimiter
         if delimit_options_with == "newlines":
-            options = [opt.strip() for opt in replacement_options.splitlines() if opt.strip()]
+            opts = [opt.strip() for opt in replacement_options.splitlines() if opt.strip()]
         elif delimit_options_with == "commas":
-            options = [opt.strip() for opt in replacement_options.split(',') if opt.strip()]
+            opts = [opt.strip() for opt in replacement_options.split(',') if opt.strip()]
         elif delimit_options_with == "semi-colons":
-            options = [opt.strip() for opt in replacement_options.split(';') if opt.strip()]
+            opts = [opt.strip() for opt in replacement_options.split(';') if opt.strip()]
         else:
-            options = [opt.strip() for opt in replacement_options.splitlines() if opt.strip()]
+            opts = [opt.strip() for opt in replacement_options.splitlines() if opt.strip()]
 
-        if not options:
+        if not opts:
             return (prompt_text, "")
 
-        selected = random.choice(options)
+        # Expand weighted options (syntax: N>>option)
+        expanded = []
+        pattern = re.compile(r'^\s*(\d+)\s*>>(.*)$')
+        for item in opts:
+            m = pattern.match(item)
+            if m:
+                count = int(m.group(1))
+                text = m.group(2).strip()
+                expanded.extend([text] * count)
+            else:
+                expanded.append(item)
 
-        # Handle multiple words using "|"
-        words_to_replace = word_to_replace.split("|")
+        if not expanded:
+            return (prompt_text, "")
 
+        # Select one option based on weights
+        selected = random.choice(expanded)
+
+        # Perform replacement
+        words = word_to_replace.split("|")
         if case_sensitive:
-            for word in words_to_replace:
-                prompt_text = prompt_text.replace(word, selected)
+            for w in words:
+                prompt_text = prompt_text.replace(w, selected)
         else:
-            import re
-            for word in words_to_replace:
-                pattern = re.compile(re.escape(word), re.IGNORECASE)
-                prompt_text = pattern.sub(selected, prompt_text)
+            for w in words:
+                prompt_text = re.compile(re.escape(w), re.IGNORECASE).sub(selected, prompt_text)
 
         return (prompt_text, selected)
 
